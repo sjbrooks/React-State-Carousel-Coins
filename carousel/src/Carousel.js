@@ -5,19 +5,25 @@ import image2 from "./image2.jpg";
 import image3 from "./image3.jpg";
 import Card from "./Card";
 
+/** Carousel uses Card component to render current image and is used by the App component */
+
 function Carousel(props) {
   const [cardIdx, setCardIdx] = useState(0);
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
   const goForward = () => setCardIdx(cardIdx + 1);
+  const goBackward = () => setCardIdx(cardIdx - 1);
+
+  const rightArrowHidden = cardIdx === (total - 1) ? "hidden": "";
+  const leftArrowHidden = cardIdx === 0 ? "hidden": "";
 
   return (
     <div className="Carousel">
       <h1>{props.title}</h1>
       <div className="Carousel-main">
         <i
-          className="fas fa-chevron-circle-left fa-2x"
-          onClick={goForward}
+          className={`fas fa-chevron-circle-left fa-2x ${leftArrowHidden}`}
+          onClick={goBackward}
           data-testid="left-arrow"
         />
         <Card
@@ -27,7 +33,7 @@ function Carousel(props) {
           totalNum={total}
         />
         <i
-          className="fas fa-chevron-circle-right fa-2x"
+          className={`fas fa-chevron-circle-right fa-2x ${rightArrowHidden}`}
           onClick={goForward}
           data-testid="right-arrow"
         />

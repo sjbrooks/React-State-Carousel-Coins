@@ -1,6 +1,8 @@
 import React from "react";
 import "./Card.css";
 
+/** Card component renders the current image and is used in Carousel component */
+
 function Card(props) {
   return (
     <div className="Card">
